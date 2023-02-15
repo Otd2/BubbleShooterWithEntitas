@@ -11,17 +11,17 @@ public partial class GameEntity {
     public CoordinateComponent coordinate { get { return (CoordinateComponent)GetComponent(GameComponentsLookup.Coordinate); } }
     public bool hasCoordinate { get { return HasComponent(GameComponentsLookup.Coordinate); } }
 
-    public void AddCoordinate(Coordinate newCoordinate) {
+    public void AddCoordinate(UnityEngine.Vector2Int newValue) {
         var index = GameComponentsLookup.Coordinate;
         var component = (CoordinateComponent)CreateComponent(index, typeof(CoordinateComponent));
-        component.coordinate = newCoordinate;
+        component.value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceCoordinate(Coordinate newCoordinate) {
+    public void ReplaceCoordinate(UnityEngine.Vector2Int newValue) {
         var index = GameComponentsLookup.Coordinate;
         var component = (CoordinateComponent)CreateComponent(index, typeof(CoordinateComponent));
-        component.coordinate = newCoordinate;
+        component.value = newValue;
         ReplaceComponent(index, component);
     }
 

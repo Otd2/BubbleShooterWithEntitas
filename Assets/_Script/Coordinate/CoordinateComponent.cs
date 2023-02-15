@@ -1,7 +1,9 @@
 ﻿using Entitas;
+using Entitas.CodeGeneration.Attributes;
+using UnityEngine;
 
 [Game]
 public class CoordinateComponent : IComponent
 {
-    public Coordinate coordinate;
+    [PrimaryEntityIndex] public Vector2Int value;
 }

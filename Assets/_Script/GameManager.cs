@@ -12,7 +12,11 @@ public class GameManager : MonoBehaviour
 
     GameController _gameController;
 
-    void Awake() => _gameController = new GameController(Contexts.sharedInstance, gameConfigSo, shootOrigin, inputService);
+    void Awake() => _gameController =
+        new GameController(Contexts.sharedInstance, gameConfigSo, shootOrigin, inputService);
+
     void Start() => _gameController.Initialize();
     void Update() => _gameController.Execute();
+    void OnDestroy() => _gameController.OnDestroy();
 }
+

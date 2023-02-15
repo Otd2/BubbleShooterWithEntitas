@@ -21,7 +21,6 @@ public class PreviewSystem : ReactiveSystem<GameEntity>, IInitializeSystem {
 
 	protected override void Execute(List<GameEntity> entities) {
 		var coord = entities.SingleEntity().targetCoordinate.value;
-		previewEntity.ReplaceCoordinate(new Coordinate(coord));
 		previewEntity.ReplacePosition(BubbleNeighbourLogicService.FromCoordToWorldPos(coord));
 	}
 

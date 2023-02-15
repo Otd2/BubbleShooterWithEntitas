@@ -63,8 +63,6 @@ public class RayService
             {
                 hitPositions.Add(shootInfo.point);
                 var hitCoordinate = shootInfo.collider.GetComponent<BubbleView>().GetCoordinate();
-                
-                Debug.Log("HIT : " + hitCoordinate.x+ " ,"+hitCoordinate.y);
                 var shootDif = shootInfo.collider.transform.position - (Vector3)shootInfo.point;
                 var previewCoordinate = GetSnappedPreviewCoordinate(hitCoordinate, shootDif);
                 var oldCoordinate = Contexts.sharedInstance.game.targetCoordinate.value;

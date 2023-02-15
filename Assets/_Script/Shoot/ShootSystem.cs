@@ -27,13 +27,20 @@ public class ShootSystem : ReactiveSystem<InputEntity> {
 		var trajectoryComp = _contexts.game.trajectory.hitPoints;
 		_contexts.game.isShootTrigger = true;
 		dummyGameObject.transform.position = _contexts.game.aim.origin;
-		dummyGameObject.transform.DOPath(trajectoryComp.ToArray(), 3f).OnUpdate(() =>
+		trajectoryComp[^1] =
+			BubbleNeighbourLogicService.FromCoordToWorldPos(_contexts.game.targetCoordinate.value);
+		dummyGameObject.transform.DOPath(trajectoryComp.ToArray(), 1f)
+			.SetEase(Ease.Linear)
+			.OnUpdate(() =>
 		{
 			shootBubble.ReplacePosition(dummyGameObject.transform.position);
 			
 		}).OnComplete(() =>
 		{
 			//TODO : SPAWN NEW OBJECT AND THEN START MERGE
+			shootBubble.isDestroyed = true;
+			var newBubble = _contexts.game.CreateBoardBubble(shootBubble.value.Number, _contexts.game.targetCoordinate.value);
+			newBubble.isNewCreated = true;
 		});
 		
 		entities[0].isReleased = false;

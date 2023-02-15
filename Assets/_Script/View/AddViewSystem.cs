@@ -10,8 +10,6 @@ public sealed class AddViewSystem : ReactiveSystem<GameEntity>
     public AddViewSystem(Contexts contexts) : base(contexts.game)
     {
         _parent = new GameObject("Map").transform;
-        //TODO : INJECT THIS POSITION
-        _parent.transform.position = new Vector3(-2.75f, 6, 0);
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) =>

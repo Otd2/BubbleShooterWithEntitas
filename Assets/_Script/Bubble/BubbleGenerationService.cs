@@ -1,22 +1,23 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public static class BubbleContextExtension
 {
-    public static GameEntity CreateRandomBubble(this GameContext context, Coordinate coordinate)
+    public static GameEntity CreateRandomBubble(this GameContext context, Vector2Int coordinate)
     {
-        var randomNumber = 1 << Random.Range(1, 10);
+        var randomNumber = 1 << Random.Range(1, 4);
         return CreateBoardBubble(context, randomNumber, coordinate);
     }
     
     public static GameEntity CreateBoardBubble
-        (this GameContext context, int number, Coordinate coordinate)
+        (this GameContext context, int number, Vector2Int coordinate)
     {
         var entity = context.CreateEntity();
         entity.isBubble = true;
         entity.AddValue(number);
         entity.AddCoordinate(coordinate);
         entity.AddAsset("Bubble");
-        entity.AddPosition(BubbleNeighbourLogicService.FromCoordToWorldPos(coordinate.Value));
+        entity.AddPosition(BubbleNeighbourLogicService.FromCoordToWorldPos(coordinate));
         return entity;
     }
     
@@ -24,10 +25,8 @@ public static class BubbleContextExtension
         (this GameContext context)
     {
         var entity = context.CreateEntity();
-        var firstCoord = new Coordinate(coord: Vector2Int.zero);
-        entity.AddCoordinate(firstCoord);
         entity.AddAsset("Preview");
-        entity.AddPosition(BubbleNeighbourLogicService.FromCoordToWorldPos(firstCoord.Value));
+        entity.AddPosition(new Vector2(-100,-100));
         return entity;
     }
     
@@ -41,5 +40,22 @@ public static class BubbleContextExtension
         entity.AddPosition(startPos);
         return entity;
     }
+    
+    /*
+    public static List<GameEntity> GetNeighboursWithNumber
+        (this GameContext context, int number, Vector2Int center)
+    {
+
+        var allBubbles = context.GetEntities(GameMatcher.Coordinate);
+        
+        var neighbours = BubbleNeighbourLogicService.GetNeighbourCoordinates(center);
+
+
+        foreach (var neighbour in neighbours)
+        {
+            
+        }
+    }
+    */
     
 }

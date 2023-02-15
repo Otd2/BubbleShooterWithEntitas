@@ -116,7 +116,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Sprite: {fileID: 3603017109095700251}
-  DestroyDuration: 0
+  Number: {fileID: 3603017110622417386}
+  DestroyDuration: 0.5
 --- !u!1 &3603017110622417384
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,7 +176,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: -5115896086140503989, guid: e441931ac12bec54caa039d1dd63121d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -289,5 +290,5 @@ MonoBehaviour:
   _SortingLayerID: 0
   _SortingOrder: 0
   m_hasFontAssetChanged: 0
-  m_renderer: {fileID: 0}
+  m_renderer: {fileID: 3603017110622417387}
   m_maskType: 0

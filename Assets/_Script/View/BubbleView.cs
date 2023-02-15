@@ -1,16 +1,19 @@
 ﻿using DG.Tweening;
 using Entitas;
+using TMPro;
 using UnityEngine;
 
 public class BubbleView : View, IValueListener
 {
     public SpriteRenderer Sprite;
-    public float DestroyDuration;
+    public TextMeshPro Number;
+    public float DestroyDuration=0.5f;
 
     public override void Link(IEntity entity)
     {
         base.Link(entity);
         _linkedEntity.AddValueListener(this);
+        
         /*if (_linkedEntity.piece.Type >= 0)
         {
             var config = Contexts.sharedInstance.config.pieceColorsConfig.value;
@@ -20,10 +23,8 @@ public class BubbleView : View, IValueListener
 
     public override void OnPosition(GameEntity entity, Vector2 value)
     {
-        if(_linkedEntity.isShootingBubble)
-            transform.position = value;
-        else
-            base.OnPosition(entity, value);
+        transform.DOKill();
+        base.OnPosition(entity, value);
         
         //transform.DOKill();
         /*var isTopRow = value.y == Contexts.sharedInstance.game.board.Size.y - 1;
@@ -35,12 +36,12 @@ public class BubbleView : View, IValueListener
     
     public void OnValue(GameEntity entity, int number)
     {
-        
+        Number.text = "" + number;
     }
 
     public Vector2Int GetCoordinate()
     {
-        return _linkedEntity.coordinate.coordinate.Value;
+        return _linkedEntity.coordinate.value;
     }
 
     protected override void OnDestroy()

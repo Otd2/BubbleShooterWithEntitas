@@ -39,4 +39,8 @@ public class GameController
         _systems.Execute();
         _systems.Cleanup();
     }
+    
+    public void OnDestroy() {
+        _systems.TearDown();
+    }
 }

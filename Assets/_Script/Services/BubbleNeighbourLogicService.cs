@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public static class BubbleNeighbourLogicService
@@ -8,7 +9,7 @@ public static class BubbleNeighbourLogicService
     private static float VerticalSpacing;
     private static float CellSize = 0.5f;
     
-    private static Dictionary<Direction, Vector2Int> _directionVectors 
+    public static readonly Dictionary<Direction, Vector2Int> DirectionVectors 
         = new Dictionary<Direction, Vector2Int>()
     {
         { Direction.E, new Vector2Int(2, 0) },
@@ -28,14 +29,26 @@ public static class BubbleNeighbourLogicService
 
     public static Vector2Int GetNeighborCoordinate(Vector2Int coord, Direction direction)
     {
-        return coord + _directionVectors[direction];
+        return coord + DirectionVectors[direction];
     }
 
     public static Vector3 FromCoordToWorldPos(Vector2Int coord)
     {
         return new Vector3(HorizontalSpacing * (coord.x / 2f),
-            -coord.y * VerticalSpacing);
+            -coord.y * VerticalSpacing) + new Vector3(-2.75f, 6,0);
     }
+
+    public static List<Vector2Int> GetNeighbourCoordinates(Vector2Int center)
+    {
+        List<Vector2Int> neighbourCoords = new List<Vector2Int>();
+        foreach (var directionVector in DirectionVectors.Values)
+        {
+            neighbourCoords.Add(directionVector + center);
+        }
+
+        return neighbourCoords;
+    }
+
 }
 
 public enum Direction

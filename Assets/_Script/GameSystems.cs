@@ -15,6 +15,11 @@ public class GameSystems : Feature
         Add(new MapInitSystem(contexts));
 
         Add(new ShootSystem(contexts));
+        Add(new MergeControlSystem(contexts));
+        Add(new TimerSystem(contexts));
+        Add(new MergeTriggerSystem(contexts));
+        Add(new MergeCompletedSystem(contexts));
+        
 
         Add(new AddViewSystem(contexts));
         
