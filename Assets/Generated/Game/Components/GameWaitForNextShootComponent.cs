@@ -8,15 +8,15 @@
 //------------------------------------------------------------------------------
 public partial class GameContext {
 
-    public GameEntity shootTriggerEntity { get { return GetGroup(GameMatcher.ShootTrigger).GetSingleEntity(); } }
+    public GameEntity waitForNextShootEntity { get { return GetGroup(GameMatcher.WaitForNextShoot).GetSingleEntity(); } }
 
-    public bool isShootTrigger {
-        get { return shootTriggerEntity != null; }
+    public bool isWaitForNextShoot {
+        get { return waitForNextShootEntity != null; }
         set {
-            var entity = shootTriggerEntity;
+            var entity = waitForNextShootEntity;
             if (value != (entity != null)) {
                 if (value) {
-                    CreateEntity().isShootTrigger = true;
+                    CreateEntity().isWaitForNextShoot = true;
                 } else {
                     entity.Destroy();
                 }
@@ -35,18 +35,18 @@ public partial class GameContext {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly ShootTriggerComponent shootTriggerComponent = new ShootTriggerComponent();
+    static readonly WaitForNextShootComponent waitForNextShootComponent = new WaitForNextShootComponent();
 
-    public bool isShootTrigger {
-        get { return HasComponent(GameComponentsLookup.ShootTrigger); }
+    public bool isWaitForNextShoot {
+        get { return HasComponent(GameComponentsLookup.WaitForNextShoot); }
         set {
-            if (value != isShootTrigger) {
-                var index = GameComponentsLookup.ShootTrigger;
+            if (value != isWaitForNextShoot) {
+                var index = GameComponentsLookup.WaitForNextShoot;
                 if (value) {
                     var componentPool = GetComponentPool(index);
                     var component = componentPool.Count > 0
                             ? componentPool.Pop()
-                            : shootTriggerComponent;
+                            : waitForNextShootComponent;
 
                     AddComponent(index, component);
                 } else {
@@ -67,17 +67,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherShootTrigger;
+    static Entitas.IMatcher<GameEntity> _matcherWaitForNextShoot;
 
-    public static Entitas.IMatcher<GameEntity> ShootTrigger {
+    public static Entitas.IMatcher<GameEntity> WaitForNextShoot {
         get {
-            if (_matcherShootTrigger == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.ShootTrigger);
+            if (_matcherWaitForNextShoot == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.WaitForNextShoot);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherShootTrigger = matcher;
+                _matcherWaitForNextShoot = matcher;
             }
 
-            return _matcherShootTrigger;
+            return _matcherWaitForNextShoot;
         }
     }
 }

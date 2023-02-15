@@ -19,15 +19,19 @@ public class View : MonoBehaviour, IView, IPositionListener, IDestroyedListener
 
     public virtual void OnPosition(GameEntity entity, Vector2 value)
     {
+        if (_linkedEntity.isDestroyed)
+            return;
         transform.position = new Vector3(value.x, value.y);
     }
 
-    public virtual void OnDestroyed(GameEntity entity) => OnDestroy();
+    public virtual void OnDestroyed(GameEntity entity) => OnDestroyView();
 
     
-    protected virtual void OnDestroy()
+    protected virtual void OnDestroyView()
     {
+        Debug.Log("TRYING TO DESTROY : " + gameObject.GetInstanceID());
         gameObject.Unlink();
         Destroy(gameObject);
+        _linkedEntity.Destroy();
     }
 }

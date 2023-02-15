@@ -33,6 +33,7 @@ public class RayService
         entity.AddTrajectory(null);
         entity.AddAsset("Trajectory");
         entity.AddPosition(new Vector2(0,-4));
+        entity.isVisible = false;
         return entity;
     }
     
@@ -65,6 +66,8 @@ public class RayService
                 var hitCoordinate = shootInfo.collider.GetComponent<BubbleView>().GetCoordinate();
                 var shootDif = shootInfo.collider.transform.position - (Vector3)shootInfo.point;
                 var previewCoordinate = GetSnappedPreviewCoordinate(hitCoordinate, shootDif);
+                if (Contexts.sharedInstance.game.GetEntityWithCoordinate(previewCoordinate) != null)
+                    return;
                 var oldCoordinate = Contexts.sharedInstance.game.targetCoordinate.value;
                 if(previewCoordinate != oldCoordinate)
                     Contexts.sharedInstance.game.ReplaceTargetCoordinate(previewCoordinate);

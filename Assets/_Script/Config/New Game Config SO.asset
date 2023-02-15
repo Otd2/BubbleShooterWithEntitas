@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boardSize: {x: 6, y: 6}
   bubbleShootSpeed: 1
-  mergeAndPopIntervalTime: 1
+  mergeAndPopIntervalTime: 0.25
   maxAllowedBounce: 1
   deepestPointOnScreen: 6
   shallowestPointOnScreen: 2

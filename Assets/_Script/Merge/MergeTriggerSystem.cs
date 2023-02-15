@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MergeTriggerSystem : ReactiveSystem<GameEntity> {
     private Contexts _contexts;
+    private List<Vector2> startPos; 
 
 	public MergeTriggerSystem (Contexts contexts) : base(contexts.game) {
         _contexts = contexts;
@@ -20,16 +21,18 @@ public class MergeTriggerSystem : ReactiveSystem<GameEntity> {
 
 	protected override void Execute(List<GameEntity> entities)
 	{
-		var bubblesWillBeMerged = _contexts.game.GetEntities(GameMatcher.MergeFlag);
+		var bubblesWillBeMerged = _contexts.game.GetEntities
+			(GameMatcher.AllOf(GameMatcher.MergeFlag, GameMatcher.MergeStartPosition));
+		startPos = new List<Vector2>();
 		foreach (var bubble in bubblesWillBeMerged)
 		{
 			if (bubble.hasCoordinate)
 			{
 				bubble.RemoveCoordinate();
 			}
-			var newPos = Vector2.Lerp(bubble.position.Value,
+			var newPos = Vector2.Lerp(bubble.mergeStartPosition.value,
 				BubbleNeighbourLogicService.FromCoordToWorldPos(entities[0].merge.target),
-				1f-entities[0].timer.time);
+				1 - ((entities[0].timer.time) / _contexts.config.gameConfig.value.MergeAndPopIntervalTime));
 			
 			bubble.ReplacePosition(newPos);
 		}

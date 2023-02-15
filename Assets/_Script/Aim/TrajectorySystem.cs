@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TrajectorySystem : ReactiveSystem<GameEntity>, IInitializeSystem {
-    private GameContext _contexts;
+    private Contexts _contexts;
     private readonly RayService _rayService;
 
-    public TrajectorySystem (GameContext contexts, RayService rayService) : base(contexts)
+    public TrajectorySystem (Contexts contexts, RayService rayService) : base(contexts.game)
     {
 	    _contexts = contexts;
 	    _rayService = rayService;
@@ -19,7 +19,7 @@ public class TrajectorySystem : ReactiveSystem<GameEntity>, IInitializeSystem {
 
 	protected override bool Filter(GameEntity entity)
 	{
-		return !_contexts.isShootTrigger;
+		return !_contexts.game.isWaitForNextShoot;
 	}
 
 	protected override void Execute(List<GameEntity> entities)
@@ -27,12 +27,16 @@ public class TrajectorySystem : ReactiveSystem<GameEntity>, IInitializeSystem {
 		Vector2 origin = Vector2.one;
 		foreach (var e in entities)
 		{
+			
+			_contexts.game.trajectoryEntity.isVisible = e.isVisible;
 			origin = e.aim.origin;
 			_rayService.ShootRay(e.aim.origin, e.aim.normalizedDir);
-			_contexts.ReplaceTrajectory(_rayService.HitPositions);
+			_contexts.game.ReplaceTrajectory(_rayService.HitPositions);
+			_contexts.game.trajectoryEntity.isVisible = _contexts.input.touchPositionEntity.isTouching;
+
 		}
 
-		foreach (var point in _contexts.trajectory.hitPoints)
+		foreach (var point in _contexts.game.trajectory.hitPoints)
 		{
 			Debug.DrawLine(origin, point);
 			origin = point;
@@ -41,6 +45,6 @@ public class TrajectorySystem : ReactiveSystem<GameEntity>, IInitializeSystem {
 
 	public void Initialize()
 	{
-		RayService.CreateTrajectoryView(_contexts);
+		RayService.CreateTrajectoryView(_contexts.game);
 	}
 }

@@ -3,16 +3,24 @@ using Entitas;
 using TMPro;
 using UnityEngine;
 
-public class BubbleView : View, IValueListener
+public class BubbleView : View, IValueListener, IInteractableListener, IFallListener
 {
     public SpriteRenderer Sprite;
     public TextMeshPro Number;
     public float DestroyDuration=0.5f;
+    public Collider2D collider;
+    private Rigidbody2D _rigidbody;
 
     public override void Link(IEntity entity)
     {
         base.Link(entity);
+        collider = GetComponent<CircleCollider2D>();
+        _rigidbody = GetComponent<Rigidbody2D>();
+        if(_rigidbody != null)
+            _rigidbody.bodyType = RigidbodyType2D.Kinematic;
         _linkedEntity.AddValueListener(this);
+        _linkedEntity.AddInteractableListener(this);
+        _linkedEntity.AddFallListener(this);
         
         /*if (_linkedEntity.piece.Type >= 0)
         {
@@ -23,9 +31,9 @@ public class BubbleView : View, IValueListener
 
     public override void OnPosition(GameEntity entity, Vector2 value)
     {
-        transform.DOKill();
         base.OnPosition(entity, value);
         
+        transform.DOKill();
         //transform.DOKill();
         /*var isTopRow = value.y == Contexts.sharedInstance.game.board.Size.y - 1;
         if (isTopRow)
@@ -44,14 +52,26 @@ public class BubbleView : View, IValueListener
         return _linkedEntity.coordinate.value;
     }
 
-    protected override void OnDestroy()
+    protected override void OnDestroyView()
     {
-        var color = Sprite.color;
-        color.a = 0f;
-        Sprite.material.DOColor(color, DestroyDuration);
-        gameObject.transform
-            .DOScale(Vector3.one * 1.5f, DestroyDuration)
-            .OnComplete(base.OnDestroy);
+        Debug.Log("CALLED BUBBLE DESTROY");
+        base.OnDestroyView();
+        /* var color = Sprite.color;
+         color.a = 0f;
+         Sprite.material.DOColor(color, 0.1f);
+         gameObject.transform
+             .DOScale(Vector3.one * 1.5f, 0.1f)
+             .OnComplete(base.OnDestroy);*/
     }
-    
+
+    public void OnInteractable(GameEntity entity)
+    {
+        collider.enabled = entity.isInteractable;
+    }
+
+    public void OnFall(GameEntity entity)
+    {
+        _rigidbody.bodyType = RigidbodyType2D.Dynamic;
+        _rigidbody.AddForce(new Vector2(Random.Range(-1f, 1f), 1f));
+    }
 }

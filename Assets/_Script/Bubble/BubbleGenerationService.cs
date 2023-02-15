@@ -5,7 +5,7 @@ public static class BubbleContextExtension
 {
     public static GameEntity CreateRandomBubble(this GameContext context, Vector2Int coordinate)
     {
-        var randomNumber = 1 << Random.Range(1, 4);
+        var randomNumber = 1 << Random.Range(1, 8);
         return CreateBoardBubble(context, randomNumber, coordinate);
     }
     

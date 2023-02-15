@@ -27,9 +27,9 @@ public class PreviewBubbleView : View, IValueListener
         */
     }
 
-    protected override void OnDestroy()
+    protected override void OnDestroyView()
     {
-        base.OnDestroy();
+        base.OnDestroyView();
        /* var color = Sprite.color;
         color.a = 0f;
         Sprite.material.DOColor(color, DestroyDuration);

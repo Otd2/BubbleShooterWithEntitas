@@ -1,5 +1,6 @@
 ﻿using Entitas;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class MergeCompletedSystem : ReactiveSystem<GameEntity> {
     private Contexts _contexts;
@@ -19,12 +20,14 @@ public class MergeCompletedSystem : ReactiveSystem<GameEntity> {
 
 	protected override void Execute(List<GameEntity> entities)
 	{
-		var targets = _contexts.game.GetEntities(GameMatcher.MergeFlag);
+		var targets = _contexts.game.GetEntities(GameMatcher.AllOf(GameMatcher.MergeFlag).NoneOf(GameMatcher.Destroyed));
+		Debug.Log("MERGE COMPLETED");
 		foreach (var e in targets)
 		{
 			e.isDestroyed = true;
 		}
-
+	
+		
 		var newBubble = _contexts.game.CreateBoardBubble(entities.SingleEntity().merge.targetNumber,
 			entities.SingleEntity().merge.target);
 		newBubble.isNewCreated = true;

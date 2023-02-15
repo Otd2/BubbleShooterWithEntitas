@@ -2,6 +2,6 @@ using Entitas;
 using Entitas.CodeGeneration.Attributes;
 
 [Game, Unique]
-public class ShootTriggerComponent : IComponent {
+public class WaitForNextShootComponent : IComponent {
 
 }

@@ -14,26 +14,34 @@ public static class GameComponentsLookup {
     public const int Coordinate = 3;
     public const int Destroyed = 4;
     public const int DestroyedListener = 5;
-    public const int MapSize = 6;
-    public const int Merge = 7;
-    public const int MergeFlag = 8;
-    public const int Movable = 9;
-    public const int NewCreated = 10;
-    public const int Position = 11;
-    public const int PositionListener = 12;
-    public const int Ray = 13;
-    public const int ShootingBubble = 14;
-    public const int ShootTrigger = 15;
-    public const int TargetCoordinate = 16;
-    public const int TimerComplete = 17;
-    public const int Timer = 18;
-    public const int Trajectory = 19;
-    public const int TrajectoryListener = 20;
-    public const int Value = 21;
-    public const int ValueListener = 22;
-    public const int View = 23;
+    public const int Fall = 6;
+    public const int FallListener = 7;
+    public const int Interactable = 8;
+    public const int InteractableListener = 9;
+    public const int MapSize = 10;
+    public const int Merge = 11;
+    public const int MergeFlag = 12;
+    public const int MergeStartPosition = 13;
+    public const int Movable = 14;
+    public const int NewCreated = 15;
+    public const int Position = 16;
+    public const int PositionListener = 17;
+    public const int Ray = 18;
+    public const int ShootingBubble = 19;
+    public const int TargetCoordinate = 20;
+    public const int TimerComplete = 21;
+    public const int Timer = 22;
+    public const int Trajectory = 23;
+    public const int TrajectoryListener = 24;
+    public const int Value = 25;
+    public const int ValueListener = 26;
+    public const int View = 27;
+    public const int Visible = 28;
+    public const int VisibleListener = 29;
+    public const int VisitedNode = 30;
+    public const int WaitForNextShoot = 31;
 
-    public const int TotalComponents = 24;
+    public const int TotalComponents = 32;
 
     public static readonly string[] componentNames = {
         "Aim",
@@ -42,16 +50,20 @@ public static class GameComponentsLookup {
         "Coordinate",
         "Destroyed",
         "DestroyedListener",
+        "Fall",
+        "FallListener",
+        "Interactable",
+        "InteractableListener",
         "MapSize",
         "Merge",
         "MergeFlag",
+        "MergeStartPosition",
         "Movable",
         "NewCreated",
         "Position",
         "PositionListener",
         "Ray",
         "ShootingBubble",
-        "ShootTrigger",
         "TargetCoordinate",
         "TimerComplete",
         "Timer",
@@ -59,7 +71,11 @@ public static class GameComponentsLookup {
         "TrajectoryListener",
         "Value",
         "ValueListener",
-        "View"
+        "View",
+        "Visible",
+        "VisibleListener",
+        "VisitedNode",
+        "WaitForNextShoot"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -69,16 +85,20 @@ public static class GameComponentsLookup {
         typeof(CoordinateComponent),
         typeof(DestroyedComponent),
         typeof(DestroyedListenerComponent),
+        typeof(FallComponent),
+        typeof(FallListenerComponent),
+        typeof(InteractableComponent),
+        typeof(InteractableListenerComponent),
         typeof(MapSizeComponent),
         typeof(MergeComponent),
         typeof(MergeFlagComponent),
+        typeof(MergeStartPositionComponent),
         typeof(MovableComponent),
         typeof(NewCreatedComponent),
         typeof(PositionComponent),
         typeof(PositionListenerComponent),
         typeof(RayComponent),
         typeof(ShootingBubbleComponent),
-        typeof(ShootTriggerComponent),
         typeof(TargetCoordinateComponent),
         typeof(TimerComplete),
         typeof(TimerComponent),
@@ -86,6 +106,10 @@ public static class GameComponentsLookup {
         typeof(TrajectoryListenerComponent),
         typeof(ValueComponent),
         typeof(ValueListenerComponent),
-        typeof(ViewComponent)
+        typeof(ViewComponent),
+        typeof(VisibleComponent),
+        typeof(VisibleListenerComponent),
+        typeof(VisitedNodeComponent),
+        typeof(WaitForNextShootComponent)
     };
 }

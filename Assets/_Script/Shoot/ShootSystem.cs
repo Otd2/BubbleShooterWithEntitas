@@ -18,18 +18,20 @@ public class ShootSystem : ReactiveSystem<InputEntity> {
 	}
 
 	protected override bool Filter(InputEntity entity) {
-        return entity.isReleased && !_contexts.game.isShootTrigger;
+        return entity.isReleased && !_contexts.game.isWaitForNextShoot ;
 	}
 
 	protected override void Execute(List<InputEntity> entities)
 	{
+		_contexts.game.isWaitForNextShoot = true;
 		var shootBubble = BubbleContextExtension.CreateBubbleForShoot(_contexts.game, 2, _contexts.game.aim.origin);
 		var trajectoryComp = _contexts.game.trajectory.hitPoints;
-		_contexts.game.isShootTrigger = true;
 		dummyGameObject.transform.position = _contexts.game.aim.origin;
 		trajectoryComp[^1] =
 			BubbleNeighbourLogicService.FromCoordToWorldPos(_contexts.game.targetCoordinate.value);
-		dummyGameObject.transform.DOPath(trajectoryComp.ToArray(), 1f)
+		
+		
+		dummyGameObject.transform.DOPath(trajectoryComp.ToArray(), 0.5f)
 			.SetEase(Ease.Linear)
 			.OnUpdate(() =>
 		{
@@ -42,7 +44,6 @@ public class ShootSystem : ReactiveSystem<InputEntity> {
 			var newBubble = _contexts.game.CreateBoardBubble(shootBubble.value.Number, _contexts.game.targetCoordinate.value);
 			newBubble.isNewCreated = true;
 		});
-		
 		entities[0].isReleased = false;
 	}
 }
