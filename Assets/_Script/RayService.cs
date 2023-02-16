@@ -6,20 +6,25 @@ public class RayService
 {
     private readonly int wallLayer;
     private readonly int bubbleLayer;
+    private readonly int topLayer;
     private List<Vector3> hitPositions;
     public List<Vector3> HitPositions => hitPositions;
 
     int wallMask;
     int bubbleMask;
+    int topMask;
     private int layerMask; 
 
     public RayService(int wallLayer, int bubbleLayer)
     {
         this.wallLayer = wallLayer;
         this.bubbleLayer = bubbleLayer;
+        this.topLayer = topLayer;
+        
         wallMask = 1<<wallLayer;
         bubbleMask = 1<<bubbleLayer;
-
+        topMask = 1 << topLayer;
+        
         layerMask = wallMask | bubbleMask;
         hitPositions = new List<Vector3>();
 

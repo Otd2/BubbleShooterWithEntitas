@@ -9,7 +9,7 @@ public class BounceTriggerSystem : ReactiveSystem<GameEntity> {
 	}
 
 	protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) {
-		return context.CreateCollector(GameMatcher.NewCreated);
+		return context.CreateCollector(GameMatcher.AllOf(GameMatcher.NewCreated, GameMatcher.FirstShotBubble));
 	}
 
 	protected override bool Filter(GameEntity entity)
@@ -23,8 +23,10 @@ public class BounceTriggerSystem : ReactiveSystem<GameEntity> {
 		foreach (var neighbour in neighbours)
 		{
 			var neighbourEntity = _contexts.game.GetEntityWithCoordinate(neighbour);
-			if(neighbourEntity is { isMergeFlag: false })
+			if(neighbourEntity is { isMergeFlag: false , isBubble:true})
 				neighbourEntity.AddBounce(entities[0].position.Value);
 		}
+
+		entities[0].isFirstShotBubble = false;
 	}
 }

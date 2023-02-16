@@ -8,7 +8,6 @@ public static class BubbleContextExtension
         var randomNumber = 1 << Random.Range(1, 8);
         return CreateBoardBubble(context, randomNumber, coordinate);
     }
-    
     public static GameEntity CreateBoardBubble
         (this GameContext context, int number, Vector2Int coordinate)
     {
@@ -18,6 +17,17 @@ public static class BubbleContextExtension
         entity.AddCoordinate(coordinate);
         entity.AddAsset("Bubble");
         entity.AddPosition(BubbleNeighbourLogicService.FromCoordToWorldPos(coordinate));
+        return entity;
+    }
+    
+    public static GameEntity CreateTopLayerBubble
+        (this GameContext context, Vector2Int coordinate)
+    {
+        var entity = context.CreateEntity();
+        entity.AddCoordinate(coordinate);
+        entity.AddAsset("TopLayerBubble");
+        entity.AddPosition(BubbleNeighbourLogicService.FromCoordToWorldPos(coordinate));
+        entity.isTopLayer = true;
         return entity;
     }
     

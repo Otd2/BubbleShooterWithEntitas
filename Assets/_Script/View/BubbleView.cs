@@ -56,7 +56,6 @@ public class BubbleView : View, IValueListener, IInteractableListener, IFallList
     protected override void OnDestroyView()
     {
         transform.DOKill();
-        Debug.Log("CALLED BUBBLE DESTROY");
         base.OnDestroyView();
         /* var color = Sprite.color;
          color.a = 0f;
@@ -75,14 +74,14 @@ public class BubbleView : View, IValueListener, IInteractableListener, IFallList
     {
         transform.DOKill();
         _rigidbody.bodyType = RigidbodyType2D.Dynamic;
-        _rigidbody.AddForce(new Vector2(Random.Range(-1f, 1f) * 5f, 1f));
+        _rigidbody.AddForce(new Vector2(Random.Range(-1f, 1f) * 5f, 1f), ForceMode2D.Impulse);
     }
 
     public void OnBounce(GameEntity entity, Vector2 from)
     {
         var direction = transform.position - (Vector3)from;
-        transform.DOMove(transform.position + direction.normalized * 0.1f, 0.085f)
-            .SetEase(Ease.OutQuart)
+        transform.DOMove(transform.position + direction.normalized * 0.15f, 0.12f)
+            .SetEase(Ease.OutCubic)
             .SetLoops(2, LoopType.Yoyo);
         entity.RemoveBounce();
     }

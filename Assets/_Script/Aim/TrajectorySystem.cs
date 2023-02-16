@@ -27,7 +27,6 @@ public class TrajectorySystem : ReactiveSystem<GameEntity>, IInitializeSystem {
 		Vector2 origin = Vector2.one;
 		foreach (var e in entities)
 		{
-			
 			_contexts.game.trajectoryEntity.isVisible = e.isVisible;
 			origin = e.aim.origin;
 			_rayService.ShootRay(e.aim.origin, e.aim.normalizedDir);
@@ -38,7 +37,7 @@ public class TrajectorySystem : ReactiveSystem<GameEntity>, IInitializeSystem {
 
 		foreach (var point in _contexts.game.trajectory.hitPoints)
 		{
-			Debug.DrawLine(origin, point);
+			//Debug.DrawLine(origin, point);
 			origin = point;
 		}
 	}

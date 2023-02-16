@@ -29,7 +29,7 @@ public class View : MonoBehaviour, IView, IPositionListener, IDestroyedListener
     
     protected virtual void OnDestroyView()
     {
-        Debug.Log("TRYING TO DESTROY : " + gameObject.GetInstanceID());
+//        Debug.Log("TRYING TO DESTROY : " + gameObject.GetInstanceID());
         gameObject.Unlink();
         Destroy(gameObject);
         _linkedEntity.Destroy();

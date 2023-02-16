@@ -8,12 +8,25 @@ public class MapInitSystem : IInitializeSystem  {
     	_contexts = contexts;
     }
 
+    private Vector2Int topLayerStartCoordinate = new Vector2Int(1, -1);
+
 	public void Initialize() {
 		var entity = _contexts.game.CreateEntity();
 		var boardSize = _contexts.config.gameConfig.value.BoardSize;
 		entity.AddMapSize(boardSize);
 		BubbleNeighbourLogicService.Init();
-		for (int y = 0; y < boardSize.y; y++)
+
+		var topLayerCoord = topLayerStartCoordinate;
+		var topLayerEntity = _contexts.game.CreateTopLayerBubble(topLayerCoord);
+		//CreateTopLayer
+		for (int i = 1; i < boardSize.x; i++)
+		{
+			topLayerCoord = BubbleNeighbourLogicService.
+				GetNeighborCoordinate(topLayerCoord, Direction.E);
+			topLayerEntity = _contexts.game.CreateTopLayerBubble(topLayerCoord);
+		}
+		
+		for (int y = 0; y < 1; y++)
 		{
 			var oldCoordinate = new Vector2Int(y%2, y);
 			_contexts.game.CreateRandomBubble(oldCoordinate);
@@ -24,5 +37,7 @@ public class MapInitSystem : IInitializeSystem  {
 				_contexts.game.CreateRandomBubble(oldCoordinate);
 			}
 		}
+		
+		
 	}		
 }

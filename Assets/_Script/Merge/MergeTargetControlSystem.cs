@@ -31,7 +31,7 @@ public class MergeTargetControlSystem : ReactiveSystem<GameEntity> {
 			foreach (var neighbour in allNeighbours)
 			{
 				var neighbourEntity = _contexts.game.GetEntityWithCoordinate(neighbour);
-				if (neighbourEntity is { isMergeFlag: false })
+				if (neighbourEntity is { isMergeFlag: false, isBubble:true })
 				{
 					if (neighbourEntity.value.Number == value)
 					{

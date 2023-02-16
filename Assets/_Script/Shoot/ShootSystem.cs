@@ -43,6 +43,7 @@ public class ShootSystem : ReactiveSystem<InputEntity> {
 			shootBubble.isDestroyed = true;
 			var newBubble = _contexts.game.CreateBoardBubble(shootBubble.value.Number, _contexts.game.targetCoordinate.value);
 			newBubble.isNewCreated = true;
+			newBubble.isFirstShotBubble = true;
 		});
 		entities[0].isReleased = false;
 	}

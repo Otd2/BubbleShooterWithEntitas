@@ -17,6 +17,7 @@ public class GameController
     public GameController(Contexts contexts, IGameConfig gameConfig, Transform shootOrigin, IInputService inputService)
     {
         var random = new Random(DateTime.UtcNow.Millisecond);
+        Application.targetFrameRate = 60;
         UnityEngine.Random.InitState(random.Next());
         //Rand.game = new Rand(random.Next());
 

@@ -27,8 +27,6 @@ public static class DFSHelper
 
             if (!node.isVisitedNode) {
                 node.isVisitedNode = true;
-                Debug.Log("Visited node with value " + node.coordinate.value);
-
                 foreach (Vector2Int neighbor in BubbleNeighbourLogicService.GetNeighbourCoordinates(node.coordinate.value))
                 {
                     var neighbourEntity = contexts.game.GetEntityWithCoordinate(neighbor);

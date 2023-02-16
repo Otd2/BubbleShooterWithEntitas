@@ -62,7 +62,6 @@ public class MergeControlSystem : ReactiveSystem<GameEntity> {
 			var tempEntity = _contexts.game.GetEntityWithCoordinate(coordinate);
 			if (tempEntity is { hasValue: true, isMergeFlag: false })
 			{
-				
 				//Debug.Log("Has game entity at " + coordinate.x + ", " + coordinate.y);
 				if (!searchedValues.Contains(coordinate))
 				{

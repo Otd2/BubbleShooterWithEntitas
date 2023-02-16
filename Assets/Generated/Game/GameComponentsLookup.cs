@@ -18,32 +18,34 @@ public static class GameComponentsLookup {
     public const int DestroyedListener = 7;
     public const int Fall = 8;
     public const int FallListener = 9;
-    public const int Interactable = 10;
-    public const int InteractableListener = 11;
-    public const int MapSize = 12;
-    public const int Merge = 13;
-    public const int MergeFlag = 14;
-    public const int MergeStartPosition = 15;
-    public const int Movable = 16;
-    public const int NewCreated = 17;
-    public const int Position = 18;
-    public const int PositionListener = 19;
-    public const int Ray = 20;
-    public const int ShootingBubble = 21;
-    public const int TargetCoordinate = 22;
-    public const int TimerComplete = 23;
-    public const int Timer = 24;
-    public const int Trajectory = 25;
-    public const int TrajectoryListener = 26;
-    public const int Value = 27;
-    public const int ValueListener = 28;
-    public const int View = 29;
-    public const int Visible = 30;
-    public const int VisibleListener = 31;
-    public const int VisitedNode = 32;
-    public const int WaitForNextShoot = 33;
+    public const int FirstShotBubble = 10;
+    public const int Interactable = 11;
+    public const int InteractableListener = 12;
+    public const int MapSize = 13;
+    public const int Merge = 14;
+    public const int MergeFlag = 15;
+    public const int MergeStartPosition = 16;
+    public const int Movable = 17;
+    public const int NewCreated = 18;
+    public const int Position = 19;
+    public const int PositionListener = 20;
+    public const int Ray = 21;
+    public const int ShootingBubble = 22;
+    public const int TargetCoordinate = 23;
+    public const int TimerComplete = 24;
+    public const int Timer = 25;
+    public const int TopLayer = 26;
+    public const int Trajectory = 27;
+    public const int TrajectoryListener = 28;
+    public const int Value = 29;
+    public const int ValueListener = 30;
+    public const int View = 31;
+    public const int Visible = 32;
+    public const int VisibleListener = 33;
+    public const int VisitedNode = 34;
+    public const int WaitForNextShoot = 35;
 
-    public const int TotalComponents = 34;
+    public const int TotalComponents = 36;
 
     public static readonly string[] componentNames = {
         "Aim",
@@ -56,6 +58,7 @@ public static class GameComponentsLookup {
         "DestroyedListener",
         "Fall",
         "FallListener",
+        "FirstShotBubble",
         "Interactable",
         "InteractableListener",
         "MapSize",
@@ -71,6 +74,7 @@ public static class GameComponentsLookup {
         "TargetCoordinate",
         "TimerComplete",
         "Timer",
+        "TopLayer",
         "Trajectory",
         "TrajectoryListener",
         "Value",
@@ -93,6 +97,7 @@ public static class GameComponentsLookup {
         typeof(DestroyedListenerComponent),
         typeof(FallComponent),
         typeof(FallListenerComponent),
+        typeof(FirstShotBubbleComponent),
         typeof(InteractableComponent),
         typeof(InteractableListenerComponent),
         typeof(MapSizeComponent),
@@ -108,6 +113,7 @@ public static class GameComponentsLookup {
         typeof(TargetCoordinateComponent),
         typeof(TimerComplete),
         typeof(TimerComponent),
+        typeof(TopLayerComponent),
         typeof(TrajectoryComponent),
         typeof(TrajectoryListenerComponent),
         typeof(ValueComponent),
