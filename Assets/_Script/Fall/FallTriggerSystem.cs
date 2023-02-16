@@ -9,18 +9,21 @@ public class FallTriggerSystem : ReactiveSystem<GameEntity> {
 	}
 
 	protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) {
-		return context.CreateCollector(GameMatcher.VisitedNode.AddedOrRemoved());
+		return context.CreateCollector(GameMatcher.NewCreated);
 	}
 
 	protected override bool Filter(GameEntity entity)
 	{
-		return !entity.isVisitedNode;
+		return true;
 	}
 
-	protected override void Execute(List<GameEntity> entities) {
-		foreach (var e in entities)
+	protected override void Execute(List<GameEntity> entities)
+	{
+		var bubbles = _contexts.game.GetEntities(GameMatcher.Bubble);
+		foreach (var e in bubbles)
 		{
-			e.isFall = true;
+			if(!e.isVisitedNode)
+				e.isFall = true;
 		}
 	}
 }

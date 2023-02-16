@@ -9,6 +9,7 @@
 public sealed class GameEventSystems : Feature {
 
     public GameEventSystems(Contexts contexts) {
+        Add(new BounceEventSystem(contexts)); // priority: 0
         Add(new DestroyedEventSystem(contexts)); // priority: 0
         Add(new FallEventSystem(contexts)); // priority: 0
         Add(new InteractableEventSystem(contexts)); // priority: 0

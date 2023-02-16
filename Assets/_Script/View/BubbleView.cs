@@ -3,7 +3,7 @@ using Entitas;
 using TMPro;
 using UnityEngine;
 
-public class BubbleView : View, IValueListener, IInteractableListener, IFallListener
+public class BubbleView : View, IValueListener, IInteractableListener, IFallListener, IBounceListener
 {
     public SpriteRenderer Sprite;
     public TextMeshPro Number;
@@ -21,6 +21,7 @@ public class BubbleView : View, IValueListener, IInteractableListener, IFallList
         _linkedEntity.AddValueListener(this);
         _linkedEntity.AddInteractableListener(this);
         _linkedEntity.AddFallListener(this);
+        _linkedEntity.AddBounceListener(this);
         
         /*if (_linkedEntity.piece.Type >= 0)
         {
@@ -31,9 +32,9 @@ public class BubbleView : View, IValueListener, IInteractableListener, IFallList
 
     public override void OnPosition(GameEntity entity, Vector2 value)
     {
+        transform.DOKill();
         base.OnPosition(entity, value);
         
-        transform.DOKill();
         //transform.DOKill();
         /*var isTopRow = value.y == Contexts.sharedInstance.game.board.Size.y - 1;
         if (isTopRow)
@@ -54,6 +55,7 @@ public class BubbleView : View, IValueListener, IInteractableListener, IFallList
 
     protected override void OnDestroyView()
     {
+        transform.DOKill();
         Debug.Log("CALLED BUBBLE DESTROY");
         base.OnDestroyView();
         /* var color = Sprite.color;
@@ -71,7 +73,17 @@ public class BubbleView : View, IValueListener, IInteractableListener, IFallList
 
     public void OnFall(GameEntity entity)
     {
+        transform.DOKill();
         _rigidbody.bodyType = RigidbodyType2D.Dynamic;
-        _rigidbody.AddForce(new Vector2(Random.Range(-1f, 1f), 1f));
+        _rigidbody.AddForce(new Vector2(Random.Range(-1f, 1f) * 5f, 1f));
+    }
+
+    public void OnBounce(GameEntity entity, Vector2 from)
+    {
+        var direction = transform.position - (Vector3)from;
+        transform.DOMove(transform.position + direction.normalized * 0.1f, 0.085f)
+            .SetEase(Ease.OutQuart)
+            .SetLoops(2, LoopType.Yoyo);
+        entity.RemoveBounce();
     }
 }
