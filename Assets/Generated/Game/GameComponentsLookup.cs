@@ -10,46 +10,50 @@ public static class GameComponentsLookup {
 
     public const int Aim = 0;
     public const int Asset = 1;
-    public const int Bounce = 2;
-    public const int BounceListener = 3;
-    public const int Bubble = 4;
-    public const int Coordinate = 5;
-    public const int Destroyed = 6;
-    public const int DestroyedListener = 7;
-    public const int Fall = 8;
-    public const int FallListener = 9;
-    public const int FirstShotBubble = 10;
-    public const int Interactable = 11;
-    public const int InteractableListener = 12;
-    public const int MapSize = 13;
-    public const int Merge = 14;
-    public const int MergeFlag = 15;
-    public const int MergeStartPosition = 16;
-    public const int Movable = 17;
-    public const int NewCreated = 18;
-    public const int Position = 19;
-    public const int PositionListener = 20;
-    public const int Ray = 21;
-    public const int ShootingBubble = 22;
-    public const int TargetCoordinate = 23;
-    public const int TimerComplete = 24;
-    public const int Timer = 25;
-    public const int TopLayer = 26;
-    public const int Trajectory = 27;
-    public const int TrajectoryListener = 28;
-    public const int Value = 29;
-    public const int ValueListener = 30;
-    public const int View = 31;
-    public const int Visible = 32;
-    public const int VisibleListener = 33;
-    public const int VisitedNode = 34;
-    public const int WaitForNextShoot = 35;
+    public const int Bomb = 2;
+    public const int BombListener = 3;
+    public const int Bounce = 4;
+    public const int BounceListener = 5;
+    public const int Bubble = 6;
+    public const int Coordinate = 7;
+    public const int Destroyed = 8;
+    public const int DestroyedListener = 9;
+    public const int Fall = 10;
+    public const int FallListener = 11;
+    public const int FirstShotBubble = 12;
+    public const int Interactable = 13;
+    public const int InteractableListener = 14;
+    public const int MapSize = 15;
+    public const int Merge = 16;
+    public const int MergeFlag = 17;
+    public const int MergeStartPosition = 18;
+    public const int Movable = 19;
+    public const int NewCreated = 20;
+    public const int Position = 21;
+    public const int PositionListener = 22;
+    public const int Ray = 23;
+    public const int ShootingBubble = 24;
+    public const int TargetCoordinate = 25;
+    public const int TimerComplete = 26;
+    public const int Timer = 27;
+    public const int TopLayer = 28;
+    public const int Trajectory = 29;
+    public const int TrajectoryListener = 30;
+    public const int Value = 31;
+    public const int ValueListener = 32;
+    public const int View = 33;
+    public const int Visible = 34;
+    public const int VisibleListener = 35;
+    public const int VisitedNode = 36;
+    public const int WaitForNextShoot = 37;
 
-    public const int TotalComponents = 36;
+    public const int TotalComponents = 38;
 
     public static readonly string[] componentNames = {
         "Aim",
         "Asset",
+        "Bomb",
+        "BombListener",
         "Bounce",
         "BounceListener",
         "Bubble",
@@ -89,6 +93,8 @@ public static class GameComponentsLookup {
     public static readonly System.Type[] componentTypes = {
         typeof(AimComponent),
         typeof(AssetComponent),
+        typeof(BombComponent),
+        typeof(BombListenerComponent),
         typeof(BounceComponent),
         typeof(BounceListenerComponent),
         typeof(BubbleComponent),

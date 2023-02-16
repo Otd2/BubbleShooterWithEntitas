@@ -19,7 +19,7 @@ public class MergeControlSystem : ReactiveSystem<GameEntity> {
 
 	protected override bool Filter(GameEntity entity)
 	{
-		return entity.isBubble && !entity.isShootingBubble;
+		return entity.isBubble && !entity.isShootingBubble && entity.value.Number != 4096;
 	}
 
 	protected override void Execute(List<GameEntity> entities)

@@ -44,6 +44,8 @@ public static class BubbleContextExtension
         (this GameContext context, int number, Vector3 startPos)
     {
         var entity = context.CreateEntity();
+        
+        //var randomNumber = 1 << Random.Range(1, 8);
         entity.AddValue(number);
         entity.isShootingBubble = true;
         entity.AddAsset("Bubble");

@@ -21,6 +21,7 @@ public class GameSystems : Feature
         Add(new TimerSystem(contexts));
         Add(new MergeTriggerSystem(contexts));
         Add(new MergeCompletedSystem(contexts));
+        Add(new BombSystem(contexts));
         
 
         Add(new AddViewSystem(contexts));

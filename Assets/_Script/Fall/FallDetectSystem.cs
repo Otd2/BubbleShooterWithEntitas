@@ -44,7 +44,7 @@ public class FallDetectSystem : ReactiveSystem<GameEntity> {
 	protected override void Execute(List<GameEntity> entities)
 	{
 		var bubbles = _contexts.game.GetEntities
-			(GameMatcher.AllOf(GameMatcher.Bubble, GameMatcher.Coordinate));
+			(GameMatcher.AllOf(GameMatcher.Bubble, GameMatcher.Coordinate).NoneOf(GameMatcher.Fall));
 		_contexts.ClearVisitedStack();
 		Debug.Log("TOP ENTITES COUNT = " + bubbles.Length);
 		foreach (var e in bubbles)

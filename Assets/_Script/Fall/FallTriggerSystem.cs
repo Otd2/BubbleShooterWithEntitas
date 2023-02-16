@@ -22,8 +22,11 @@ public class FallTriggerSystem : ReactiveSystem<GameEntity> {
 		var bubbles = _contexts.game.GetEntities(GameMatcher.Bubble);
 		foreach (var e in bubbles)
 		{
-			if(!e.isVisitedNode)
+			if (!e.isVisitedNode && !e.isFall && !e.isBomb && e.hasCoordinate)
+			{
 				e.isFall = true;
+				e.RemoveCoordinate();
+			}
 		}
 	}
 }

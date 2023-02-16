@@ -24,7 +24,7 @@ public class ShootSystem : ReactiveSystem<InputEntity> {
 	protected override void Execute(List<InputEntity> entities)
 	{
 		_contexts.game.isWaitForNextShoot = true;
-		var shootBubble = BubbleContextExtension.CreateBubbleForShoot(_contexts.game, 2, _contexts.game.aim.origin);
+		var shootBubble = BubbleContextExtension.CreateBubbleForShoot(_contexts.game, 2048, _contexts.game.aim.origin);
 		var trajectoryComp = _contexts.game.trajectory.hitPoints;
 		dummyGameObject.transform.position = _contexts.game.aim.origin;
 		trajectoryComp[^1] =

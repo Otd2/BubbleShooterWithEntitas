@@ -1,9 +1,10 @@
 ﻿using DG.Tweening;
 using Entitas;
+using Entitas.Unity;
 using TMPro;
 using UnityEngine;
 
-public class BubbleView : View, IValueListener, IInteractableListener, IFallListener, IBounceListener
+public class BubbleView : View, IValueListener, IInteractableListener, IFallListener, IBounceListener, IBombListener
 {
     public SpriteRenderer Sprite;
     public TextMeshPro Number;
@@ -22,6 +23,7 @@ public class BubbleView : View, IValueListener, IInteractableListener, IFallList
         _linkedEntity.AddInteractableListener(this);
         _linkedEntity.AddFallListener(this);
         _linkedEntity.AddBounceListener(this);
+        _linkedEntity.AddBombListener(this);
         
         /*if (_linkedEntity.piece.Type >= 0)
         {
@@ -75,14 +77,22 @@ public class BubbleView : View, IValueListener, IInteractableListener, IFallList
         transform.DOKill();
         _rigidbody.bodyType = RigidbodyType2D.Dynamic;
         _rigidbody.AddForce(new Vector2(Random.Range(-1f, 1f) * 5f, 1f), ForceMode2D.Impulse);
+        collider.enabled = false;
     }
 
     public void OnBounce(GameEntity entity, Vector2 from)
     {
         var direction = transform.position - (Vector3)from;
-        transform.DOMove(transform.position + direction.normalized * 0.15f, 0.12f)
+        transform.DOMove(transform.position + direction.normalized * 0.15f, 0.16f)
             .SetEase(Ease.OutCubic)
             .SetLoops(2, LoopType.Yoyo);
         entity.RemoveBounce();
+    }
+
+    public void OnBomb(GameEntity entity)
+    {
+        Debug.Log("BOMB");
+        //PARTICLE
+        entity.isDestroyed = true;
     }
 }

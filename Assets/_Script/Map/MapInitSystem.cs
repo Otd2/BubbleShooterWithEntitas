@@ -26,7 +26,7 @@ public class MapInitSystem : IInitializeSystem  {
 			topLayerEntity = _contexts.game.CreateTopLayerBubble(topLayerCoord);
 		}
 		
-		for (int y = 0; y < 1; y++)
+		for (int y = 0; y < boardSize.y; y++)
 		{
 			var oldCoordinate = new Vector2Int(y%2, y);
 			_contexts.game.CreateRandomBubble(oldCoordinate);
