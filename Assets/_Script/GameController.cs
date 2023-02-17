@@ -14,7 +14,8 @@ public class GameController
 {
     readonly Systems _systems;
 
-    public GameController(Contexts contexts, IGameConfig gameConfig, Transform shootOrigin, IInputService inputService)
+    public GameController(Contexts contexts, IGameConfig gameConfig, IPieceColorsConfig colorConfig,
+        Transform[] shootOrigin, IInputService inputService, IParticlesService particlesService)
     {
         var random = new Random(DateTime.UtcNow.Millisecond);
         Application.targetFrameRate = 60;
@@ -22,10 +23,11 @@ public class GameController
         //Rand.game = new Rand(random.Next());
 
         contexts.config.SetGameConfig(gameConfig);
-
+        contexts.config.SetPieceColorsConfig(colorConfig);
+        particlesService.Init();
         // This is the heart of Match One:
         // All logic is contained in all the sub systems of GameSystems
-        _systems = new GameSystems(contexts, inputService, shootOrigin);
+        _systems = new GameSystems(contexts, inputService, shootOrigin, particlesService);
     }
 
     public void Initialize()

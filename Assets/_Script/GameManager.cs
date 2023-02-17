@@ -7,13 +7,18 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private LeanTouchInputService inputService;
-    [SerializeField] private Transform shootOrigin;
+    [SerializeField] private Transform[] shootBubblePositions;
     [SerializeField] private GameConfigSO gameConfigSo;
+    [SerializeField] private BubbleColorConfigSO colorConfigSo;
+    [SerializeField] private ParticleService particlesService;
 
     GameController _gameController;
 
     void Awake() => _gameController =
-        new GameController(Contexts.sharedInstance, gameConfigSo, shootOrigin, inputService);
+        new GameController(Contexts.sharedInstance, 
+            gameConfigSo, colorConfigSo, 
+            shootBubblePositions, inputService,
+            particlesService);
 
     void Start() => _gameController.Initialize();
     void Update() => _gameController.Execute();

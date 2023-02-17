@@ -21,33 +21,39 @@ public static class GameComponentsLookup {
     public const int Fall = 10;
     public const int FallListener = 11;
     public const int FirstShotBubble = 12;
-    public const int Interactable = 13;
-    public const int InteractableListener = 14;
-    public const int MapSize = 15;
-    public const int Merge = 16;
-    public const int MergeFlag = 17;
-    public const int MergeStartPosition = 18;
-    public const int Movable = 19;
-    public const int NewCreated = 20;
-    public const int Position = 21;
-    public const int PositionListener = 22;
-    public const int Ray = 23;
-    public const int ShootingBubble = 24;
-    public const int TargetCoordinate = 25;
-    public const int TimerComplete = 26;
-    public const int Timer = 27;
-    public const int TopLayer = 28;
-    public const int Trajectory = 29;
-    public const int TrajectoryListener = 30;
-    public const int Value = 31;
-    public const int ValueListener = 32;
-    public const int View = 33;
-    public const int Visible = 34;
-    public const int VisibleListener = 35;
-    public const int VisitedNode = 36;
-    public const int WaitForNextShoot = 37;
+    public const int FollowPath = 13;
+    public const int FollowPathListener = 14;
+    public const int Interactable = 15;
+    public const int InteractableListener = 16;
+    public const int MapInitilized = 17;
+    public const int MapSize = 18;
+    public const int Merge = 19;
+    public const int MergeFlag = 20;
+    public const int MergeStartPosition = 21;
+    public const int Movable = 22;
+    public const int NewCreated = 23;
+    public const int PathCompleted = 24;
+    public const int Position = 25;
+    public const int PositionListener = 26;
+    public const int Ray = 27;
+    public const int Shoot = 28;
+    public const int ShootingBubble = 29;
+    public const int ShootingBubbleListener = 30;
+    public const int TargetCoordinate = 31;
+    public const int TimerComplete = 32;
+    public const int Timer = 33;
+    public const int TopLayer = 34;
+    public const int Trajectory = 35;
+    public const int TrajectoryListener = 36;
+    public const int Value = 37;
+    public const int ValueListener = 38;
+    public const int View = 39;
+    public const int Visible = 40;
+    public const int VisibleListener = 41;
+    public const int VisitedNode = 42;
+    public const int WaitForNextShoot = 43;
 
-    public const int TotalComponents = 38;
+    public const int TotalComponents = 44;
 
     public static readonly string[] componentNames = {
         "Aim",
@@ -63,18 +69,24 @@ public static class GameComponentsLookup {
         "Fall",
         "FallListener",
         "FirstShotBubble",
+        "FollowPath",
+        "FollowPathListener",
         "Interactable",
         "InteractableListener",
+        "MapInitilized",
         "MapSize",
         "Merge",
         "MergeFlag",
         "MergeStartPosition",
         "Movable",
         "NewCreated",
+        "PathCompleted",
         "Position",
         "PositionListener",
         "Ray",
+        "Shoot",
         "ShootingBubble",
+        "ShootingBubbleListener",
         "TargetCoordinate",
         "TimerComplete",
         "Timer",
@@ -104,18 +116,24 @@ public static class GameComponentsLookup {
         typeof(FallComponent),
         typeof(FallListenerComponent),
         typeof(FirstShotBubbleComponent),
+        typeof(FollowPathComponent),
+        typeof(FollowPathListenerComponent),
         typeof(InteractableComponent),
         typeof(InteractableListenerComponent),
+        typeof(MapInitilizedComponent),
         typeof(MapSizeComponent),
         typeof(MergeComponent),
         typeof(MergeFlagComponent),
         typeof(MergeStartPositionComponent),
         typeof(MovableComponent),
         typeof(NewCreatedComponent),
+        typeof(PathCompletedComponent),
         typeof(PositionComponent),
         typeof(PositionListenerComponent),
         typeof(RayComponent),
+        typeof(ShootComponent),
         typeof(ShootingBubbleComponent),
+        typeof(ShootingBubbleListenerComponent),
         typeof(TargetCoordinateComponent),
         typeof(TimerComplete),
         typeof(TimerComponent),

@@ -8,25 +8,25 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly ShootingBubbleComponent shootingBubbleComponent = new ShootingBubbleComponent();
+    public ShootingBubbleComponent shootingBubble { get { return (ShootingBubbleComponent)GetComponent(GameComponentsLookup.ShootingBubble); } }
+    public bool hasShootingBubble { get { return HasComponent(GameComponentsLookup.ShootingBubble); } }
 
-    public bool isShootingBubble {
-        get { return HasComponent(GameComponentsLookup.ShootingBubble); }
-        set {
-            if (value != isShootingBubble) {
-                var index = GameComponentsLookup.ShootingBubble;
-                if (value) {
-                    var componentPool = GetComponentPool(index);
-                    var component = componentPool.Count > 0
-                            ? componentPool.Pop()
-                            : shootingBubbleComponent;
+    public void AddShootingBubble(int newShootIndex) {
+        var index = GameComponentsLookup.ShootingBubble;
+        var component = (ShootingBubbleComponent)CreateComponent(index, typeof(ShootingBubbleComponent));
+        component.shootIndex = newShootIndex;
+        AddComponent(index, component);
+    }
 
-                    AddComponent(index, component);
-                } else {
-                    RemoveComponent(index);
-                }
-            }
-        }
+    public void ReplaceShootingBubble(int newShootIndex) {
+        var index = GameComponentsLookup.ShootingBubble;
+        var component = (ShootingBubbleComponent)CreateComponent(index, typeof(ShootingBubbleComponent));
+        component.shootIndex = newShootIndex;
+        ReplaceComponent(index, component);
+    }
+
+    public void RemoveShootingBubble() {
+        RemoveComponent(GameComponentsLookup.ShootingBubble);
     }
 }
 

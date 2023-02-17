@@ -25,6 +25,7 @@ public class MergeCompletedSystem : ReactiveSystem<GameEntity> {
 		foreach (var e in targets)
 		{
 			e.isDestroyed = true;
+			e.RemoveCoordinate();
 		}
 	
 		

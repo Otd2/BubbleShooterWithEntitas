@@ -4,19 +4,23 @@ using Entitas.Unity;
 using TMPro;
 using UnityEngine;
 
-public class BubbleView : View, IValueListener, IInteractableListener, IFallListener, IBounceListener, IBombListener
+public class BubbleView : View, IValueListener, IInteractableListener, IFallListener
+    , IBounceListener, IBombListener, IShootingBubbleListener, IFollowPathListener
 {
     public SpriteRenderer Sprite;
     public TextMeshPro Number;
     public float DestroyDuration=0.5f;
     public Collider2D collider;
     private Rigidbody2D _rigidbody;
+    private Transform frame;
 
     public override void Link(IEntity entity)
     {
         base.Link(entity);
         collider = GetComponent<CircleCollider2D>();
         _rigidbody = GetComponent<Rigidbody2D>();
+        frame = transform.Find("Frame");
+        Sprite = GetComponent<SpriteRenderer>();
         if(_rigidbody != null)
             _rigidbody.bodyType = RigidbodyType2D.Kinematic;
         _linkedEntity.AddValueListener(this);
@@ -24,12 +28,8 @@ public class BubbleView : View, IValueListener, IInteractableListener, IFallList
         _linkedEntity.AddFallListener(this);
         _linkedEntity.AddBounceListener(this);
         _linkedEntity.AddBombListener(this);
-        
-        /*if (_linkedEntity.piece.Type >= 0)
-        {
-            var config = Contexts.sharedInstance.config.pieceColorsConfig.value;
-            Sprite.color = config.Colors[_linkedEntity.piece.Type];
-        }*/
+        _linkedEntity.AddShootingBubbleListener(this);
+        _linkedEntity.AddFollowPathListener(this);
     }
 
     public override void OnPosition(GameEntity entity, Vector2 value)
@@ -47,7 +47,9 @@ public class BubbleView : View, IValueListener, IInteractableListener, IFallList
     
     public void OnValue(GameEntity entity, int number)
     {
-        Number.text = "" + number;
+        Number.text = "" + FormatNumber(number);
+        Sprite.color = Contexts.sharedInstance.config.pieceColorsConfig.value.GetColorWithNumber(number);
+        frame.gameObject.SetActive(number >= 1024);
     }
 
     public Vector2Int GetCoordinate()
@@ -94,5 +96,37 @@ public class BubbleView : View, IValueListener, IInteractableListener, IFallList
         Debug.Log("BOMB");
         //PARTICLE
         entity.isDestroyed = true;
+    }
+    
+    static string FormatNumber(int num)
+    {
+
+        if (num >= 1000)
+            return (num / 1000).ToString("0") + "K";
+        else 
+            return num.ToString();
+    }
+
+    public void OnShootingBubble(GameEntity entity, int shootIndex)
+    {
+        transform.DOKill();
+        if (shootIndex == 0)
+        {
+            transform.DOMoveX(0, 0.3f);
+            transform.DOScale(Vector3.one, 0.3f);
+        }
+        else if(shootIndex == 1)
+        {
+            transform.localScale = Vector3.one * 0.7f;
+        }
+
+        collider.enabled = false;
+    }
+
+    public void OnFollowPath(GameEntity entity, Vector3[] path, float seconds)
+    {
+        transform.DOKill();
+        transform.DOPath(path, seconds).SetEase(Ease.Linear)
+            .OnComplete(()=>entity.isPathCompleted = true);
     }
 }

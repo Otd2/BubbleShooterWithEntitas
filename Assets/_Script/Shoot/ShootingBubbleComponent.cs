@@ -1,6 +1,8 @@
 using Entitas;
+using Entitas.CodeGeneration.Attributes;
 
-[Game]
-public class ShootingBubbleComponent : IComponent {
-
+[Game, Event(EventTarget.Self)]
+public class ShootingBubbleComponent : IComponent
+{
+    public int shootIndex;
 }

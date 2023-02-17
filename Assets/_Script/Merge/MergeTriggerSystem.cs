@@ -26,10 +26,6 @@ public class MergeTriggerSystem : ReactiveSystem<GameEntity> {
 		startPos = new List<Vector2>();
 		foreach (var bubble in bubblesWillBeMerged)
 		{
-			if (bubble.hasCoordinate)
-			{
-				bubble.RemoveCoordinate();
-			}
 			var newPos = Vector2.Lerp(bubble.mergeStartPosition.value,
 				BubbleNeighbourLogicService.FromCoordToWorldPos(entities[0].merge.target),
 				1 - ((entities[0].timer.time) / _contexts.config.gameConfig.value.MergeAndPopIntervalTime));

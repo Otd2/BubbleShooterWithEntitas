@@ -19,7 +19,7 @@ public class MergeControlSystem : ReactiveSystem<GameEntity> {
 
 	protected override bool Filter(GameEntity entity)
 	{
-		return entity.isBubble && !entity.isShootingBubble && entity.value.Number != 4096;
+		return entity.isBubble && !entity.isShoot && entity.value.Number != 4096;
 	}
 
 	protected override void Execute(List<GameEntity> entities)
@@ -36,7 +36,9 @@ public class MergeControlSystem : ReactiveSystem<GameEntity> {
 		}*/
 		isMerge = false;
 		searchedValues = new List<Vector2Int>();
-		SearchForMerge(newCreated.coordinate.value, newCreated.value.Number);
+		if(newCreated.hasCoordinate)
+			SearchForMerge(newCreated.coordinate.value, newCreated.value.Number);
+		
 		newCreated.isNewCreated = false;
 		if (!isMerge)
 		{
