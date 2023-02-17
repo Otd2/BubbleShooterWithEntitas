@@ -21,16 +21,16 @@ public sealed class VisibleEventSystem : Entitas.ReactiveSystem<GameEntity> {
     }
 
     protected override bool Filter(GameEntity entity) {
-        return entity.isVisible && entity.hasVisibleListener;
+        return entity.hasVisible && entity.hasVisibleListener;
     }
 
     protected override void Execute(System.Collections.Generic.List<GameEntity> entities) {
         foreach (var e in entities) {
-            
+            var component = e.visible;
             _listenerBuffer.Clear();
             _listenerBuffer.AddRange(e.visibleListener.value);
             foreach (var listener in _listenerBuffer) {
-                listener.OnVisible(e);
+                listener.OnVisible(e, component.isVisible);
             }
         }
     }

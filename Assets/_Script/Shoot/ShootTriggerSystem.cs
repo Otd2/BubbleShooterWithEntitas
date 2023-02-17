@@ -15,7 +15,9 @@ public class ShootTriggerSystem : ReactiveSystem<InputEntity> {
 	}
 
 	protected override bool Filter(InputEntity entity) {
-		return entity.isReleased && !_contexts.game.isWaitForNextShoot ;
+		return entity.isReleased 
+		       && !_contexts.game.isWaitForNextShoot 
+		       && _contexts.game.targetCoordinateEntity.isValidTarget;
 	}
 
 	protected override void Execute(List<InputEntity> entities)

@@ -11,7 +11,7 @@ public class PreviewSystem : ReactiveSystem<GameEntity>, IInitializeSystem {
 	}
 
 	protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context) {
-		return context.CreateCollector(GameMatcher.TargetCoordinate);
+		return context.CreateCollector(GameMatcher.AllOf(GameMatcher.TargetCoordinate));
 	}
 
 	protected override bool Filter(GameEntity entity)
@@ -19,13 +19,17 @@ public class PreviewSystem : ReactiveSystem<GameEntity>, IInitializeSystem {
 		return true;
 	}
 
-	protected override void Execute(List<GameEntity> entities) {
+	protected override void Execute(List<GameEntity> entities)
+	{
+		Debug.Log("REPLACE TARGET COORD");
 		var coord = entities.SingleEntity().targetCoordinate.value;
 		previewEntity.ReplacePosition(BubbleNeighbourLogicService.FromCoordToWorldPos(coord));
+		previewEntity.ReplaceVisible(_contexts.game.trajectoryEntity.visible.isVisible);
 	}
 
 	public void Initialize()
 	{
 		previewEntity = Contexts.sharedInstance.game.CreatePreviewBubble();
+		previewEntity.isPreview = true;
 	}
 }

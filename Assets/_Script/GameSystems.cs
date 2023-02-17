@@ -12,6 +12,7 @@ public class GameSystems : Feature
         Add(new AimSystem(contexts, shootOrigins[0].position));
         Add(new TrajectorySystem(contexts, rayService));
         Add(new PreviewSystem(contexts));
+        Add(new PreviewColorSystem(contexts));
 
         Add(new MapInitSystem(contexts));
         Add(new ShootBubbleCreatorSystem(contexts, shootOrigins));
@@ -26,7 +27,7 @@ public class GameSystems : Feature
         Add(new MergeTriggerSystem(contexts));
         Add(new ParticlesSystem(contexts, particlesService));
         Add(new MergeCompletedSystem(contexts));
-        Add(new BombSystem(contexts));
+        Add(new BombSystem(contexts, particlesService));
         
 
         Add(new AddViewSystem(contexts));

@@ -35,25 +35,27 @@ public static class GameComponentsLookup {
     public const int PathCompleted = 24;
     public const int Position = 25;
     public const int PositionListener = 26;
-    public const int Ray = 27;
-    public const int Shoot = 28;
-    public const int ShootingBubble = 29;
-    public const int ShootingBubbleListener = 30;
-    public const int TargetCoordinate = 31;
-    public const int TimerComplete = 32;
-    public const int Timer = 33;
-    public const int TopLayer = 34;
-    public const int Trajectory = 35;
-    public const int TrajectoryListener = 36;
-    public const int Value = 37;
-    public const int ValueListener = 38;
-    public const int View = 39;
-    public const int Visible = 40;
-    public const int VisibleListener = 41;
-    public const int VisitedNode = 42;
-    public const int WaitForNextShoot = 43;
+    public const int Preview = 27;
+    public const int Ray = 28;
+    public const int Shoot = 29;
+    public const int ShootingBubble = 30;
+    public const int ShootingBubbleListener = 31;
+    public const int TargetCoordinate = 32;
+    public const int TimerComplete = 33;
+    public const int Timer = 34;
+    public const int TopLayer = 35;
+    public const int Trajectory = 36;
+    public const int TrajectoryListener = 37;
+    public const int ValidTarget = 38;
+    public const int Value = 39;
+    public const int ValueListener = 40;
+    public const int View = 41;
+    public const int Visible = 42;
+    public const int VisibleListener = 43;
+    public const int VisitedNode = 44;
+    public const int WaitForNextShoot = 45;
 
-    public const int TotalComponents = 44;
+    public const int TotalComponents = 46;
 
     public static readonly string[] componentNames = {
         "Aim",
@@ -83,6 +85,7 @@ public static class GameComponentsLookup {
         "PathCompleted",
         "Position",
         "PositionListener",
+        "Preview",
         "Ray",
         "Shoot",
         "ShootingBubble",
@@ -93,6 +96,7 @@ public static class GameComponentsLookup {
         "TopLayer",
         "Trajectory",
         "TrajectoryListener",
+        "ValidTarget",
         "Value",
         "ValueListener",
         "View",
@@ -130,6 +134,7 @@ public static class GameComponentsLookup {
         typeof(PathCompletedComponent),
         typeof(PositionComponent),
         typeof(PositionListenerComponent),
+        typeof(PreviewComponent),
         typeof(RayComponent),
         typeof(ShootComponent),
         typeof(ShootingBubbleComponent),
@@ -140,6 +145,7 @@ public static class GameComponentsLookup {
         typeof(TopLayerComponent),
         typeof(TrajectoryComponent),
         typeof(TrajectoryListenerComponent),
+        typeof(ValidTargetComponent),
         typeof(ValueComponent),
         typeof(ValueListenerComponent),
         typeof(ViewComponent),

@@ -8,25 +8,25 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly VisibleComponent visibleComponent = new VisibleComponent();
+    public VisibleComponent visible { get { return (VisibleComponent)GetComponent(GameComponentsLookup.Visible); } }
+    public bool hasVisible { get { return HasComponent(GameComponentsLookup.Visible); } }
 
-    public bool isVisible {
-        get { return HasComponent(GameComponentsLookup.Visible); }
-        set {
-            if (value != isVisible) {
-                var index = GameComponentsLookup.Visible;
-                if (value) {
-                    var componentPool = GetComponentPool(index);
-                    var component = componentPool.Count > 0
-                            ? componentPool.Pop()
-                            : visibleComponent;
+    public void AddVisible(bool newIsVisible) {
+        var index = GameComponentsLookup.Visible;
+        var component = (VisibleComponent)CreateComponent(index, typeof(VisibleComponent));
+        component.isVisible = newIsVisible;
+        AddComponent(index, component);
+    }
 
-                    AddComponent(index, component);
-                } else {
-                    RemoveComponent(index);
-                }
-            }
-        }
+    public void ReplaceVisible(bool newIsVisible) {
+        var index = GameComponentsLookup.Visible;
+        var component = (VisibleComponent)CreateComponent(index, typeof(VisibleComponent));
+        component.isVisible = newIsVisible;
+        ReplaceComponent(index, component);
+    }
+
+    public void RemoveVisible() {
+        RemoveComponent(GameComponentsLookup.Visible);
     }
 }
 

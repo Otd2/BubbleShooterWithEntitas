@@ -10,6 +10,7 @@ public class ParticleService : MonoBehaviour, IParticlesService
     public bool collectionChecks = true;
     public int maxPoolSize = 20;
     public ParticleSystem poolPrefab;
+    public ParticleSystem bombPrefab;
 
     IObjectPool<ParticleSystem> m_Pool;
 
@@ -25,6 +26,13 @@ public class ParticleService : MonoBehaviour, IParticlesService
             }
             return m_Pool;
         }
+    }
+
+    public void BompParticle(Vector3 position)
+    {
+        bombPrefab.gameObject.SetActive(true);
+        bombPrefab.transform.position = position;
+        bombPrefab.Play();
     }
 
     public void Init()

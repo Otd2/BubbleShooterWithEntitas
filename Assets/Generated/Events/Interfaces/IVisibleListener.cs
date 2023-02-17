@@ -7,5 +7,5 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 public interface IVisibleListener {
-    void OnVisible(GameEntity entity);
+    void OnVisible(GameEntity entity, bool isVisible);
 }

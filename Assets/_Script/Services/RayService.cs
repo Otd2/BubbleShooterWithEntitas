@@ -38,13 +38,14 @@ public class RayService
         entity.AddTrajectory(null);
         entity.AddAsset("Trajectory");
         entity.AddPosition(new Vector2(0,-4));
-        entity.isVisible = false;
+        entity.AddVisible(false);
         return entity;
     }
     
-    public void ShootRay(Vector2 origin, Vector2 dir)
+    public bool GetTargetCoordinates(Vector2 origin, Vector2 dir, out Vector2Int hitCoord)
     {
         hitPositions.Clear();
+        hitCoord = Vector2Int.zero;
         var shootInfo = ShootARay(origin, dir,wallLayer);
         var bounceCount = 0;
         var originTemp = origin;
@@ -53,8 +54,12 @@ public class RayService
         if (shootInfo.collider != null)
         {
             
-            while (IsWallHit(shootInfo.collider) && bounceCount < Contexts.sharedInstance.config.gameConfig.value.MaxAllowedBounce)
+            while (IsWallHit(shootInfo.collider))
             {
+                if (bounceCount >= Contexts.sharedInstance.config.gameConfig.value.MaxAllowedBounce)
+                {
+                    return false;
+                }
                 hitPositions.Add(shootInfo.point);
                 var reflectedDir = Vector2.Reflect(dir, shootInfo.normal);
                 dir = reflectedDir;
@@ -70,14 +75,14 @@ public class RayService
                 hitPositions.Add(shootInfo.point);
                 var hitCoordinate = shootInfo.collider.GetComponent<BubbleView>().GetCoordinate();
                 var shootDif = shootInfo.collider.transform.position - (Vector3)shootInfo.point;
-                var previewCoordinate = GetSnappedPreviewCoordinate(hitCoordinate, shootDif);
-                if (Contexts.sharedInstance.game.GetEntityWithCoordinate(previewCoordinate) != null)
-                    return;
-                var oldCoordinate = Contexts.sharedInstance.game.targetCoordinate.value;
-                if(previewCoordinate != oldCoordinate)
-                    Contexts.sharedInstance.game.ReplaceTargetCoordinate(previewCoordinate);
+                hitCoord = GetSnappedPreviewCoordinate(hitCoordinate, shootDif);
+                if (Contexts.sharedInstance.game.GetEntityWithCoordinate(hitCoord) != null)
+                    return false;
+
+                return true;
             }
         }
+        return false;
     }
 
     private Vector2Int GetSnappedPreviewCoordinate(Vector2Int coordinate, Vector3 shootPositionDiff)

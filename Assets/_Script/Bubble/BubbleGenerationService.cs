@@ -35,8 +35,10 @@ public static class BubbleContextExtension
         (this GameContext context)
     {
         var entity = context.CreateEntity();
+        //entity.
         entity.AddAsset("Preview");
         entity.AddPosition(new Vector2(-100,-100));
+        entity.AddVisible(false);
         return entity;
     }
     
