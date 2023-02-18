@@ -25,37 +25,40 @@ public static class GameComponentsLookup {
     public const int FollowPathListener = 14;
     public const int Interactable = 15;
     public const int InteractableListener = 16;
-    public const int MapInitilized = 17;
-    public const int MapSize = 18;
-    public const int Merge = 19;
-    public const int MergeFlag = 20;
-    public const int MergeStartPosition = 21;
-    public const int Movable = 22;
-    public const int NewCreated = 23;
-    public const int PathCompleted = 24;
-    public const int Position = 25;
-    public const int PositionListener = 26;
-    public const int Preview = 27;
-    public const int Ray = 28;
-    public const int Shoot = 29;
-    public const int ShootingBubble = 30;
-    public const int ShootingBubbleListener = 31;
-    public const int TargetCoordinate = 32;
-    public const int TimerComplete = 33;
-    public const int Timer = 34;
-    public const int TopLayer = 35;
-    public const int Trajectory = 36;
-    public const int TrajectoryListener = 37;
-    public const int ValidTarget = 38;
-    public const int Value = 39;
-    public const int ValueListener = 40;
-    public const int View = 41;
-    public const int Visible = 42;
-    public const int VisibleListener = 43;
-    public const int VisitedNode = 44;
-    public const int WaitForNextShoot = 45;
+    public const int MapInitBubble = 17;
+    public const int MapInitBubbleListener = 18;
+    public const int MapInitilized = 19;
+    public const int MapSize = 20;
+    public const int Merge = 21;
+    public const int MergeFlag = 22;
+    public const int MergeStartPosition = 23;
+    public const int NewCreated = 24;
+    public const int PathCompleted = 25;
+    public const int Position = 26;
+    public const int PositionListener = 27;
+    public const int Preview = 28;
+    public const int ScoreGained = 29;
+    public const int Shoot = 30;
+    public const int ShootingBubble = 31;
+    public const int ShootingBubbleListener = 32;
+    public const int TargetCoordinate = 33;
+    public const int TimerComplete = 34;
+    public const int Timer = 35;
+    public const int TopLayer = 36;
+    public const int TotalScore = 37;
+    public const int TotalScoreListener = 38;
+    public const int Trajectory = 39;
+    public const int TrajectoryListener = 40;
+    public const int ValidTarget = 41;
+    public const int Value = 42;
+    public const int ValueListener = 43;
+    public const int View = 44;
+    public const int Visible = 45;
+    public const int VisibleListener = 46;
+    public const int VisitedNode = 47;
+    public const int WaitForNextShoot = 48;
 
-    public const int TotalComponents = 46;
+    public const int TotalComponents = 49;
 
     public static readonly string[] componentNames = {
         "Aim",
@@ -75,18 +78,19 @@ public static class GameComponentsLookup {
         "FollowPathListener",
         "Interactable",
         "InteractableListener",
+        "MapInitBubble",
+        "MapInitBubbleListener",
         "MapInitilized",
         "MapSize",
         "Merge",
         "MergeFlag",
         "MergeStartPosition",
-        "Movable",
         "NewCreated",
         "PathCompleted",
         "Position",
         "PositionListener",
         "Preview",
-        "Ray",
+        "ScoreGained",
         "Shoot",
         "ShootingBubble",
         "ShootingBubbleListener",
@@ -94,6 +98,8 @@ public static class GameComponentsLookup {
         "TimerComplete",
         "Timer",
         "TopLayer",
+        "TotalScore",
+        "TotalScoreListener",
         "Trajectory",
         "TrajectoryListener",
         "ValidTarget",
@@ -124,18 +130,19 @@ public static class GameComponentsLookup {
         typeof(FollowPathListenerComponent),
         typeof(InteractableComponent),
         typeof(InteractableListenerComponent),
+        typeof(MapInitBubbleComponent),
+        typeof(MapInitBubbleListenerComponent),
         typeof(MapInitilizedComponent),
         typeof(MapSizeComponent),
         typeof(MergeComponent),
         typeof(MergeFlagComponent),
         typeof(MergeStartPositionComponent),
-        typeof(MovableComponent),
         typeof(NewCreatedComponent),
         typeof(PathCompletedComponent),
         typeof(PositionComponent),
         typeof(PositionListenerComponent),
         typeof(PreviewComponent),
-        typeof(RayComponent),
+        typeof(ScoreGainedComponent),
         typeof(ShootComponent),
         typeof(ShootingBubbleComponent),
         typeof(ShootingBubbleListenerComponent),
@@ -143,6 +150,8 @@ public static class GameComponentsLookup {
         typeof(TimerComplete),
         typeof(TimerComponent),
         typeof(TopLayerComponent),
+        typeof(TotalScoreComponent),
+        typeof(TotalScoreListenerComponent),
         typeof(TrajectoryComponent),
         typeof(TrajectoryListenerComponent),
         typeof(ValidTargetComponent),

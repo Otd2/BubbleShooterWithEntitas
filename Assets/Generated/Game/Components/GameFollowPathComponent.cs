@@ -11,19 +11,19 @@ public partial class GameEntity {
     public FollowPathComponent followPath { get { return (FollowPathComponent)GetComponent(GameComponentsLookup.FollowPath); } }
     public bool hasFollowPath { get { return HasComponent(GameComponentsLookup.FollowPath); } }
 
-    public void AddFollowPath(UnityEngine.Vector3[] newPath, float newSeconds) {
+    public void AddFollowPath(UnityEngine.Vector3[] newPath, float newSpeed) {
         var index = GameComponentsLookup.FollowPath;
         var component = (FollowPathComponent)CreateComponent(index, typeof(FollowPathComponent));
         component.path = newPath;
-        component.seconds = newSeconds;
+        component.speed = newSpeed;
         AddComponent(index, component);
     }
 
-    public void ReplaceFollowPath(UnityEngine.Vector3[] newPath, float newSeconds) {
+    public void ReplaceFollowPath(UnityEngine.Vector3[] newPath, float newSpeed) {
         var index = GameComponentsLookup.FollowPath;
         var component = (FollowPathComponent)CreateComponent(index, typeof(FollowPathComponent));
         component.path = newPath;
-        component.seconds = newSeconds;
+        component.speed = newSpeed;
         ReplaceComponent(index, component);
     }
 

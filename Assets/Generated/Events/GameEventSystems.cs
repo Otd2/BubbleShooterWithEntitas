@@ -15,8 +15,10 @@ public sealed class GameEventSystems : Feature {
         Add(new FallEventSystem(contexts)); // priority: 0
         Add(new FollowPathEventSystem(contexts)); // priority: 0
         Add(new InteractableEventSystem(contexts)); // priority: 0
+        Add(new MapInitBubbleEventSystem(contexts)); // priority: 0
         Add(new PositionEventSystem(contexts)); // priority: 0
         Add(new ShootingBubbleEventSystem(contexts)); // priority: 0
+        Add(new TotalScoreEventSystem(contexts)); // priority: 0
         Add(new TrajectoryEventSystem(contexts)); // priority: 0
         Add(new ValueEventSystem(contexts)); // priority: 0
         Add(new VisibleEventSystem(contexts)); // priority: 0

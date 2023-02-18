@@ -6,6 +6,6 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public interface IFollowPathListener {
-    void OnFollowPath(GameEntity entity, UnityEngine.Vector3[] path, float speed);
+public interface ITotalScoreListener {
+    void OnTotalScore(GameEntity entity, int score);
 }

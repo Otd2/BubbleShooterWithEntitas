@@ -6,31 +6,31 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public sealed class FollowPathEventSystem : Entitas.ReactiveSystem<GameEntity> {
+public sealed class MapInitBubbleEventSystem : Entitas.ReactiveSystem<GameEntity> {
 
-    readonly System.Collections.Generic.List<IFollowPathListener> _listenerBuffer;
+    readonly System.Collections.Generic.List<IMapInitBubbleListener> _listenerBuffer;
 
-    public FollowPathEventSystem(Contexts contexts) : base(contexts.game) {
-        _listenerBuffer = new System.Collections.Generic.List<IFollowPathListener>();
+    public MapInitBubbleEventSystem(Contexts contexts) : base(contexts.game) {
+        _listenerBuffer = new System.Collections.Generic.List<IMapInitBubbleListener>();
     }
 
     protected override Entitas.ICollector<GameEntity> GetTrigger(Entitas.IContext<GameEntity> context) {
         return Entitas.CollectorContextExtension.CreateCollector(
-            context, Entitas.TriggerOnEventMatcherExtension.Added(GameMatcher.FollowPath)
+            context, Entitas.TriggerOnEventMatcherExtension.Added(GameMatcher.MapInitBubble)
         );
     }
 
     protected override bool Filter(GameEntity entity) {
-        return entity.hasFollowPath && entity.hasFollowPathListener;
+        return entity.isMapInitBubble && entity.hasMapInitBubbleListener;
     }
 
     protected override void Execute(System.Collections.Generic.List<GameEntity> entities) {
         foreach (var e in entities) {
-            var component = e.followPath;
+            
             _listenerBuffer.Clear();
-            _listenerBuffer.AddRange(e.followPathListener.value);
+            _listenerBuffer.AddRange(e.mapInitBubbleListener.value);
             foreach (var listener in _listenerBuffer) {
-                listener.OnFollowPath(e, component.path, component.speed);
+                listener.OnMapInitBubble(e);
             }
         }
     }

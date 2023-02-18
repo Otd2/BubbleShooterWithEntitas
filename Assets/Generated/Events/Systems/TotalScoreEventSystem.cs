@@ -6,31 +6,31 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public sealed class FollowPathEventSystem : Entitas.ReactiveSystem<GameEntity> {
+public sealed class TotalScoreEventSystem : Entitas.ReactiveSystem<GameEntity> {
 
-    readonly System.Collections.Generic.List<IFollowPathListener> _listenerBuffer;
+    readonly System.Collections.Generic.List<ITotalScoreListener> _listenerBuffer;
 
-    public FollowPathEventSystem(Contexts contexts) : base(contexts.game) {
-        _listenerBuffer = new System.Collections.Generic.List<IFollowPathListener>();
+    public TotalScoreEventSystem(Contexts contexts) : base(contexts.game) {
+        _listenerBuffer = new System.Collections.Generic.List<ITotalScoreListener>();
     }
 
     protected override Entitas.ICollector<GameEntity> GetTrigger(Entitas.IContext<GameEntity> context) {
         return Entitas.CollectorContextExtension.CreateCollector(
-            context, Entitas.TriggerOnEventMatcherExtension.Added(GameMatcher.FollowPath)
+            context, Entitas.TriggerOnEventMatcherExtension.Added(GameMatcher.TotalScore)
         );
     }
 
     protected override bool Filter(GameEntity entity) {
-        return entity.hasFollowPath && entity.hasFollowPathListener;
+        return entity.hasTotalScore && entity.hasTotalScoreListener;
     }
 
     protected override void Execute(System.Collections.Generic.List<GameEntity> entities) {
         foreach (var e in entities) {
-            var component = e.followPath;
+            var component = e.totalScore;
             _listenerBuffer.Clear();
-            _listenerBuffer.AddRange(e.followPathListener.value);
+            _listenerBuffer.AddRange(e.totalScoreListener.value);
             foreach (var listener in _listenerBuffer) {
-                listener.OnFollowPath(e, component.path, component.speed);
+                listener.OnTotalScore(e, component.Score);
             }
         }
     }
